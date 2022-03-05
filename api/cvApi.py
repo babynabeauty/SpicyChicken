@@ -48,7 +48,7 @@ async def showall(
 ):
     with open("123.jpg","wb") as f:
         f.write(file)
-    result=cvService.baiduApi("123.jpg")
+    result=cvService.cvApi("123.jpg")
     return result
 
 
