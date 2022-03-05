@@ -24,6 +24,7 @@ def baiduApi(image):
 
     """ 带参数调用通用物体和场景识别 """
     result=client.advancedGeneral(image, options)
+    print(result)
     result=result['result'][0]
     print(result)
     baike=result['baike_info']
