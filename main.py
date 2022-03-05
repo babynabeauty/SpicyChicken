@@ -25,5 +25,5 @@ if __name__ == '__main__':
     # 用于https通信
     # uvicorn.run(app='main:app', host="0.0.0.0", port=8000, reload=True, debug=True,  ssl_keyfile="./key.pem", ssl_certfile="./cert.pem")
     
-    # 用于http通信
+    # 用于http通信test
     uvicorn.run(app='main:app', host="0.0.0.0", port=8000, reload=True, debug=True)
