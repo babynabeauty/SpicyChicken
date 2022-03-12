@@ -18,7 +18,7 @@ def cvApi(image):
     image = get_file_content(image)
 
     """ 调用通用物体和场景识别 """
-    client.advancedGeneral(image);
+    client.advancedGeneral(image)
 
     """ 如果有可选参数 """
     options = {}

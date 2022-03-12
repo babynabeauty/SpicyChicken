@@ -8,6 +8,7 @@ def objectResearch(name:string):
         # 选择带数据库中带有这个关键词的
         sql="select * from kind where name like '%%%s%%'" % (name)
         cursor.execute(sql)
+        db.commit()
         data = cursor.fetchall()
     except Exception:
         db.rollback()

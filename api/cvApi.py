@@ -41,14 +41,14 @@ router = APIRouter(
 #     print(pil_image)
 #     response = cvService.baiduApi()
 #     return response
-@router.post("/picture/")
-async def showall(
-        file: bytes = File(...),
-        id: str = Form(...)
+@router.post("/picture")
+async def imageRecognize(
+    file: bytes = File(...),
+    id: str = Form(...)
 ):
     with open("123.jpg","wb") as f:
         f.write(file)
-    result=cvService.cvApi("123.jpg")
-    return result
+    response = cvService.cvApi("123.jpg")
+    return response
 
 
