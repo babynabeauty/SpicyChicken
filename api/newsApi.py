@@ -18,5 +18,8 @@ async def generate_news(
     type:str = Form(...),
     tag: str = Form(...)
 ):
+    r"""
+    根据输入生成新闻链接并保存到数据库
+    """
     response = newsService.generate_news(file, picture, title, author, type, tag)
     return response

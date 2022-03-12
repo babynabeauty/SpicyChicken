@@ -11,5 +11,8 @@ router = APIRouter(
 # 将用户信息记录到数据库中
 @router.post("/login")
 async def login(info:schemas.Login):
+    r"""
+    如果用户第一次登录则将其添加到数据库中
+    """
     response = userService.login(info.user_id)
     return response
