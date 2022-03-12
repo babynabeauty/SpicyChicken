@@ -1,5 +1,7 @@
 from aip import AipImageClassify
 from dao import cvDao
+from model.responseCode import responseCode
+
 # def baiduApi():
 def cvApi(image):
     """ 你的 APPID AK SK """
