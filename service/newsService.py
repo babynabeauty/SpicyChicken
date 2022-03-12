@@ -2,15 +2,15 @@ from model import news
 import time
 from dao import newsDao
 from model.responseCode import responseCode
-def genarate_news(file, picture, title, author, type, tag):
-    timestamp = int(time.time())
+def generate_news(file, picture, title, author, type, tag):
+    timestamp = str(int(time.time()))
     docxpath = "/var/www/html/news/documents/" + timestamp + ".docx"
     picturepath = "http://123.60.94.12/news/picture/" + timestamp + ".jpg"
 
     # 将两个文件写入本地服务器
-    with open(docxpath, "w") as f:
+    with open(docxpath, "wb") as f:
         f.write(file)
-    with open(picturepath, "w") as f:
+    with open("/var/www/html/news/picture/"+ timestamp + ".jpg", "wb") as f:
         f.write(picture)
     
     # get time

@@ -23,3 +23,13 @@ async def generate_news(
     """
     response = newsService.generate_news(file, picture, title, author, type, tag)
     return response
+
+@router.get("/getHtml")
+async def generate_news(id:int = 1646653672):
+    r"""
+    根据id获取html的文本内容
+    """
+    path = "/var/www/html/news/%d/index.html" % (id)
+    with open(path, "r", encoding="utf-8") as f:
+        response = "".join(f.readlines())
+    return response

@@ -77,7 +77,7 @@ def xml_convert(title, institution, time, filename):
     img_name.sort()
     for i in range(len(img_datalist)):
         each_img_data = img_datalist[i]
-        img_src = 'src={img_src} style="display: block;"'.format(img_src = "/news/" + filename  + "/index/word/media/" + img_name[i])
+        img_src = 'src={img_src} style="display: block;"'.format(img_src = "http://123.60.94.12/news/" + filename  + "/index/word/media/" + img_name[i])
         html = html.replace(each_img_data, img_src)
     
     # 重新写入文件
