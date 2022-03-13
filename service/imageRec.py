@@ -19,4 +19,6 @@ def recImage(image):
     """ 带参数调用通用物体和场景识别 """
     result = client.advancedGeneral(image, options)
     print("result",result)
-    return result['result'][0]
+    if result.get('error_msg') == None:
+        return result['result'][0]
+    return 400
