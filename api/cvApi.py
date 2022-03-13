@@ -5,7 +5,7 @@ from PIL import Image
 from fastapi import APIRouter, UploadFile, File
 from fastapi.logger import logger
 
-from service import cvService
+from service import cvService,feedbackService
 
 import os
 import shutil
@@ -16,39 +16,33 @@ from fastapi import APIRouter, Depends, File, UploadFile
 from fastapi import File
 from fastapi import Form
 
-# from core.config import settings
-# from api.utils import response_code
-
 # 构建api路由
 router = APIRouter(
     prefix="/cv",
     tags=["Cv"],
 )
 
-# 使用一张图片识别
-# @router.post("/picture/")
-# async def showall(file: UploadFile = File(...)):
-#     # Read the user posted file
-#     user_image = await file.read()
-#     print(user_image)
-#     # Decode the received file
-#     base64bytes = base64.b64decode(user_image)
-#     print(base64bytes)
-#     bytesObj = io.BytesIO(base64bytes)
-#     print(bytesObj)
-#     # Open the (now) image file
-#     pil_image = Image.open(user_image)
-#     print(pil_image)
-#     response = cvService.baiduApi()
-#     return response
+image_id=1
 @router.post("/picture/")
-async def showall(
-        file: bytes = File(...),
-        id: str = Form(...)
+async def identifyPicture(
+        file: bytes = File(...)
 ):
-    with open("123.jpg","wb") as f:
+    global image_id
+    with open(str(image_id)+".jpg","wb") as f:
         f.write(file)
-    result=cvService.cvApi("123.jpg")
+    result=cvService.cvApi(str(image_id)+".jpg")
+    image_id += 1
+    print("image_id",image_id)
     return result
+
+@router.get("/feedback/")
+async def giveFeedback(
+Judge_correct: bool,
+Image_id: int,
+right_name: str = None):
+    code = feedbackService.test()
+    return code
+
+
 
 

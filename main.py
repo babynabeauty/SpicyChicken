@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-from api import questionApi,cvApi
+from api import questionApi,cvApi,wordApi
 from starlette.middleware.cors import CORSMiddleware
 # from fastapi.staticfiles import StaticFiles
 
@@ -19,6 +19,7 @@ app.add_middleware(
 # 设置路由
 app.include_router(questionApi.router, prefix='/api')
 app.include_router(cvApi.router, prefix='/api')
+app.include_router(wordApi.router, prefix='/api')
 
 
 if __name__ == '__main__':

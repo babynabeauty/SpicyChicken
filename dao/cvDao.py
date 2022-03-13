@@ -7,8 +7,8 @@ def objectResearch(name:string):
         db, cursor = connect()
         # 选择带数据库中带有这个关键词的
         # sql = "select * from kind where name like '% %s %'"%(name)
-        sql="select * from kind where name like '%塑料瓶%'"
-        print(sql)
+        # sql="select * from kind where name like '% %s %'" %(name)
+        sql="select * from kind where name like '%{name}%'".format(name=name)
         cursor.execute(sql)
         data = cursor.fetchall()
     except Exception:
@@ -17,6 +17,5 @@ def objectResearch(name:string):
     finally:
         db.close()
         cursor.close()
-    print(data)
     return data, True
 
