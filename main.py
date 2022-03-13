@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-from api import questionApi, cvApi, newsApi, userApi,wordApi
+from api import questionApi, cvApi, newsApi, userApi,wordApi,rankApi
 from starlette.middleware.cors import CORSMiddleware
 # from fastapi.staticfiles import StaticFiles
 
