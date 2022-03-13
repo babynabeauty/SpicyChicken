@@ -10,6 +10,7 @@ def objectResearch(name:string):
         # sql="select * from kind where name like '% %s %'" %(name)
         sql="select * from kind where name like '%{name}%'".format(name=name)
         cursor.execute(sql)
+        db.commit()
         data = cursor.fetchall()
     except Exception:
         db.rollback()

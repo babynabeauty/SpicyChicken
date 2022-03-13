@@ -1,7 +1,6 @@
 from aip import AipImageClassify
 from dao import cvDao
 from service import imageRec
-# def baiduApi():
 
 def cvApi(image_name):
     """ 读取图片 """

@@ -24,8 +24,8 @@ router = APIRouter(
 
 image_id=1
 @router.post("/picture/")
-async def identifyPicture(
-        file: bytes = File(...)
+async def imageRecognize(
+    file: bytes = File(...),
 ):
     global image_id
     with open(str(image_id)+".jpg","wb") as f:
@@ -34,6 +34,7 @@ async def identifyPicture(
     image_id += 1
     print("image_id",image_id)
     return result
+
 
 @router.get("/feedback/")
 async def giveFeedback(
