@@ -17,12 +17,11 @@ def cvApi(image_name):
     object=result['keyword']
     data, issuccess = cvDao.objectResearch(object)
     if (issuccess):
-        rst = []
         if data==():
-            return {"code":404, "data":rst}
+            return {"code":404, "data":{}}
 
         if result['baike_info'] == {}:
-            temp = {
+            rst = {
                 "thing_name": data[0][1],
                 "garbage_kind": data[0][2],
                 "garbage_description": data[0][3],
@@ -30,7 +29,7 @@ def cvApi(image_name):
                 "image_id":image_name.split(".")[0]
             }
         else:
-            temp = {
+            rst = {
                 "thing_name": data[0][1],
                 "garbage_kind": data[0][2],
                 "icon":result['baike_info']['image_url'],
@@ -38,7 +37,6 @@ def cvApi(image_name):
                 "correct_rate":result['score'],
                 "image_id":image_name.split(".")[0]
             }
-        rst.append(temp)
     print("rst",rst)
     return {"code": 200, "data": rst}
 
