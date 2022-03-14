@@ -13,7 +13,7 @@ def showRank(user_id: str):
 
     for i in range(1, user_total):  # 冒泡排序
         for j in range(0, user_total - i):
-            if data[j][1] < data[j + 1][1]:
+            if data[j][3] < data[j + 1][3]:
                 data[j], data[j + 1] = data[j + 1], data[j]
 
     for i in range(user_total):  # 查找
@@ -27,7 +27,12 @@ def showRank(user_id: str):
 
     rank_list = []
     for i in range(len(data)):
-        rank_list.append([data[i][2], data[i][1], i + 1])
+        rank_list.append({
+            "user_name":data[i][1],
+            "avatar":data[i][2],
+            "score":data[i][3],
+            "rank": i + 1
+        })
 
     if user_exist:
         result = {

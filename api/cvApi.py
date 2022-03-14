@@ -15,32 +15,36 @@ from tempfile import NamedTemporaryFile
 from fastapi import APIRouter, Depends, File, UploadFile
 from fastapi import File
 from fastapi import Form
-
+import time
 # 构建api路由
 router = APIRouter(
     prefix="/cv",
     tags=["Cv"],
 )
 
-image_id=1
+# 图片物体识别
 @router.post("/picture/")
 async def imageRecognize(
     file: bytes = File(...),
 ):
-    global image_id
-    with open(str(image_id)+".jpg","wb") as f:
+    image_id = str(int(time.time()))
+    # 服务器保存位置
+    filepath = "/root/zhang/image/"
+    # 本机测试保存位置
+    # filepath = ""
+    with open(filepath + image_id+".jpg","wb") as f:
         f.write(file)
-    result=cvService.cvApi(str(image_id)+".jpg")
-    image_id += 1
     print("image_id",image_id)
+    result=cvService.cvApi(image_id+".jpg")
     return result
 
-
+# 反馈图片识别是否正确
 @router.get("/feedback/")
 async def giveFeedback(
-Judge_correct: bool,
-Image_id: int,
-right_name: str = None):
+    Judge_correct: bool,
+    Image_id: int,
+    right_name: str = None
+):
     code = feedbackService.test()
     return code
 

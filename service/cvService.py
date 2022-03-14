@@ -2,12 +2,15 @@ from aip import AipImageClassify
 from dao import cvDao
 from service import imageRec
 
+""" 读取图片 """
+def get_file_content(filePath):
+    with open(filePath, 'rb') as fp:
+        return fp.read()
+
 def cvApi(image_name):
-    """ 读取图片 """
-    def get_file_content(filePath):
-        with open(filePath, 'rb') as fp:
-            return fp.read()
-    image = get_file_content(image_name)
+    # 服务器图片存储地址
+    filepath = "/root/zhang/image/"
+    image = get_file_content(filepath + image_name)
 
     # 调用百度api
     result = imageRec.recImage(image)

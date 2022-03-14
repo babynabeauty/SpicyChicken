@@ -2,8 +2,8 @@ from dao import userDao
 from model.responseCode import responseCode
 
 # 根据user_id进行得分登记
-def login(user_id:str):
-    issuccess = userDao.login(user_id)
+def login(user_id:str, user_name:str, avatar:str):
+    issuccess = userDao.login(user_id, user_name, avatar)
     if(issuccess):
         return responseCode(200, None, "success")
     else:

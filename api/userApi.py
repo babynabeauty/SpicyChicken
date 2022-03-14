@@ -14,5 +14,5 @@ async def login(info:schemas.Login):
     r"""
     如果用户第一次登录则将其添加到数据库中
     """
-    response = userService.login(info.user_id)
+    response = userService.login(info.user_id, info.user_name, info.avatar)
     return response

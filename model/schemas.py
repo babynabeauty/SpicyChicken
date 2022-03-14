@@ -7,3 +7,5 @@ class SubmitAnswer(BaseModel):
     selected: str
 class Login(BaseModel):
     user_id: str
+    user_name: str
+    avatar: str
