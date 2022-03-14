@@ -40,7 +40,7 @@ def cvApi(image_name):
                 "correct_rate":result['score'],
                 "image_id":image_name.split(".")[0]
             }
-    print("rst",rst)
+    # print("rst",rst)
     return {"code": 200, "data": rst}
 
 
