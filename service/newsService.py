@@ -2,6 +2,7 @@ from model import news
 import time
 from dao import newsDao
 from model.responseCode import responseCode
+# 生成新闻
 def generate_news(file, picture, title, author, type, tag):
     timestamp = str(int(time.time()))
     docxpath = "/var/www/html/news/documents/" + timestamp + ".docx"

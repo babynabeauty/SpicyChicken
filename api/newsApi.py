@@ -24,8 +24,8 @@ async def generate_news(
     response = newsService.generate_news(file, picture, title, author, type, tag)
     return response
 
-@router.get("/getHtml")
-async def generate_news(id:int = 1646653672):
+@router.get("/getNewsDetail")
+async def generate_news(id: int):
     r"""
     根据id获取html的文本内容
     """

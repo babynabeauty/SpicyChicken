@@ -65,7 +65,6 @@ def checkRecord(user_id, question_id):
 def getHistory(user_id, month_start, month_end):
     try:
         db, cursor = connect()
-        # 选择题库所有的题
         sql = "select * from record where user_id = '%s' and question_id >= %d and question_id <= %d" % (user_id, month_start, month_end)
         cursor.execute(sql)
         db.commit()

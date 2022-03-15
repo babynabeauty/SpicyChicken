@@ -1,4 +1,4 @@
-from dao import questionDao
+from dao import questionDao, userDao
 from model.responseCode import responseCode
 import time
 import datetime
@@ -32,6 +32,7 @@ def submitAnswer(user_id: str, question_id: int, selected: str):
         # 判断选择是否正确
         if(right_anwer == selected):
             judge_correct = True
+            issuccess = userDao.add_score(user_id)
         else:
             judge_correct = False
         # 返回数据

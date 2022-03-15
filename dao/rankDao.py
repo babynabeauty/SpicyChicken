@@ -4,7 +4,6 @@ from dao.dbConnect import connect
 def showRank():
     try:
         db, cursor = connect()
-        # 选择题库所有的题
         sql = "select * from user"
         cnt = cursor.execute(sql)
         db.commit()

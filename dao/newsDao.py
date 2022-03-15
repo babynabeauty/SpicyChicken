@@ -1,5 +1,5 @@
 from dao.dbConnect import connect
-# 存储用户做题记录
+# 存储新闻
 def saveNews(title, author, time, url, picture, type, tag):
     try:
         db, cursor = connect()

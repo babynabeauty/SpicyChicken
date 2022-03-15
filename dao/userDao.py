@@ -4,7 +4,6 @@ from dao.dbConnect import connect
 def login(user_id, user_name, avatar):
     try:
         db, cursor = connect()
-        # 选择题库所有的题
         sql = "select * from user where user_id = '%s'" % (user_id)
         cnt = cursor.execute(sql)
         db.commit()
@@ -13,6 +12,21 @@ def login(user_id, user_name, avatar):
             sql = "insert into user(user_id, user_name, avatar, score) values('%s','%s','%s', %d)" % (user_id, user_name, avatar, 0)
             cursor.execute(sql)
             db.commit()
+    except Exception:
+        db.rollback()
+        return False
+    finally:
+        db.close()
+        cursor.close()
+    return True
+
+# 每日一题回答正确加分
+def add_score(user_id:str):
+    try:
+        db, cursor = connect()
+        sql = "updata user set score = score + 10 where user_id = '%s'" % (user_id)
+        cursor.execute(sql)
+        db.commit()
     except Exception:
         db.rollback()
         return False
