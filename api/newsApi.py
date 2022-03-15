@@ -33,3 +33,11 @@ async def generate_news(id: int):
     with open(path, "r", encoding="utf-8") as f:
         response = "".join(f.readlines())
     return response
+
+@router.get("/getNewsList")
+async def generate_news(offset:int):
+    r"""
+    根据偏移量获取新闻列表
+    """
+    response = newsService.getnewsList(offset)
+    return response

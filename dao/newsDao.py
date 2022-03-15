@@ -14,3 +14,18 @@ def saveNews(title, author, time, url, picture, type, tag):
         db.close()
         cursor.close()
     return True
+
+def getnewsList(offset:int):
+    try:
+        db, cursor = connect()
+        sql = "select * from news order by time desc limit 5 offset '%s';" % (offset)
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        db.commit()
+    except Exception:
+        db.rollback()
+        return None, False
+    finally:
+        db.close()
+        cursor.close()
+    return data, True
