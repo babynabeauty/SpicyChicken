@@ -18,7 +18,7 @@ def saveNews(title, author, time, url, picture, type, tag):
 def getnewsList(offset:int):
     try:
         db, cursor = connect()
-        sql = "select * from news order by time desc limit 5 offset '%s';" % (offset)
+        sql = "select * from news order by time desc limit 5 offset %d;" % (offset)
         cursor.execute(sql)
         data = cursor.fetchall()
         db.commit()
