@@ -68,13 +68,13 @@ def history(user_id:str, year:int, month:int):
         print("month_len", month_len)
         check = [0 for i in range(month_len)]
         for each_record in data:
-            check[each_record[2] - month_start] = 1
-        result = {}
+            check[int(each_record[2]) - month_start] = 1
+        result = []
         for i in range(len(check)):
             if(check[i]):
-                result[month_start + i] = True
+                result.append(True)
             else:
-                result[month_start + i] = False
+                result.append(False)
     else:
         return responseCode(400, None, "数据库操作错误")
     return responseCode(200, result, "success")
