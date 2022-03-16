@@ -38,7 +38,7 @@ def submitAnswer(user_id: str, question_id: int, selected: str):
         # 返回数据
         result = {
             "question_id":question_id,
-            "juege_correct": judge_correct,
+            "judge_correct": judge_correct,
             "answer": right_anwer,
             "explanation": explanation
         }
