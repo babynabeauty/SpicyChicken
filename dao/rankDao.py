@@ -4,7 +4,7 @@ from dao.dbConnect import connect
 def showRank():
     try:
         db, cursor = connect()
-        sql = "select * from user"
+        sql = "select * from user ORDER BY score DESC"
         cnt = cursor.execute(sql)
         db.commit()
         if(cnt == 0):
