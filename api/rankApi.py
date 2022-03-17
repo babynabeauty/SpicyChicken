@@ -9,9 +9,9 @@ router = APIRouter(
 
 # 根据用户id获取排名
 @router.get("/showRank")
-async def showRank(user_id:str):
+async def showRank(user_id:str,mode:int):
     r"""
     根据用户id获取用户排名
     """
-    response = rankService.showRank(user_id)
+    response = rankService.showRank(user_id,mode)
     return response
