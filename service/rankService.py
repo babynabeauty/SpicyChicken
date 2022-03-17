@@ -8,6 +8,7 @@ def showRank(user_id: str):
     data = list(data)
 
     user_total = len(data)  # 用户总数
+    user_score = 0 # 用户分数
     user_exist = 0  # 判断数据库中是否有该用户
     user_rank = 0  # 用户排名
 
@@ -20,6 +21,7 @@ def showRank(user_id: str):
         if data[i][0] == user_id:
             user_exist = 1
             user_rank = i + 1
+            user_score = data[i][3]
             break
 
     if user_total > 20:  # 前20名
@@ -36,6 +38,7 @@ def showRank(user_id: str):
 
     if user_exist:
         result = {
+            "user_score":user_score,
             "user_rank":user_rank,
             "rank_list":rank_list
         }
