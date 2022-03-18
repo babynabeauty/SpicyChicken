@@ -6,13 +6,16 @@ import calendar
 
 # 根据id返回题目信息
 def showone(id:int):
+    now = int(time.strftime("%Y%m%d", time.localtime()))
+    if(id > now):
+        return responseCode(400,None,"无权限访问")
     data, issuccess = questionDao.showone(id)
     if(issuccess):
         result = {
             "id" : data[0][0],
             "type" : data[0][1],
             "description" : data[0][2],
-            "option" : data[0][3].split(";"),
+            "option" : data[0][3].split("；"),
         }
         return responseCode(200, result, "success")
     elif (data == None):
@@ -91,7 +94,7 @@ def showHistoryOne(user_id: str, question_id: int):
             "id" : qdata[0][0],
             "type" : qdata[0][1],
             "description" : qdata[0][2],
-            "option" : qdata[0][3].split(";"),
+            "option" : qdata[0][3].split("；"),
             "answer" : qdata[0][4],
             "explanation":qdata[0][5]
         }
