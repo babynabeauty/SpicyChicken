@@ -23,7 +23,7 @@ async def login(info:schemas.Login):
 @router.get("/getinfo")
 async def getinfo():
     response = {
-        "appid": "wxd6174b35b309e8e9",
-        "appsecret": "d6d2b49f065313fcdff582deeeaebca0"
+        "appid": "",
+        "appsecret": ""
     }
     return response
