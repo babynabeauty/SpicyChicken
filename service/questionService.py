@@ -29,13 +29,14 @@ def submitAnswer(user_id: str, question_id: int, selected: str):
     if(issuccess):
         right_anwer = data[0][4]
         explanation = data[0][5]
-        issuccess = questionDao.saveSubmit(user_id, question_id, selected)
-        if(not issuccess):
-            return responseCode(400, None, "请勿重复提交")
-        # 判断选择是否正确
+        if(int(time.strftime("%Y%m%d", time.localtime())) == int(question_id)):
+            issuccess = questionDao.saveSubmit(user_id, question_id, selected)
+            if(not issuccess):
+                return responseCode(400, None, "请勿重复提交")        # 判断选择是否正确
         if(right_anwer == selected):
             judge_correct = True
-            issuccess = userDao.add_score(user_id)
+            if(int(time.strftime("%Y%m%d", time.localtime())) == int(question_id)):
+                issuccess = userDao.add_score(user_id)
         else:
             judge_correct = False
         # 返回数据

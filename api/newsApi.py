@@ -41,3 +41,13 @@ async def generate_news(offset:int):
     """
     response = newsService.getnewsList(offset)
     return response
+
+@router.get("/gettest")
+async def gettest():
+    r"""
+    测试html文档获取
+    """
+    path = "/root/zhang/test.html"
+    with open(path, "r", encoding="utf-8") as f:
+        response = "".join(f.readlines())
+    return response
