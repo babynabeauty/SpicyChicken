@@ -1,3 +1,4 @@
+import asyncio
 import base64
 import io
 
@@ -35,7 +36,8 @@ async def imageRecognize(
     with open(filepath + image_id+".jpg","wb") as f:
         f.write(file)
     print("image_id",image_id)
-    result=cvService.cvApi(image_id+".jpg")
+    loop = asyncio.get_event_loop()
+    result=await loop.run_in_executor(None,cvService.cvApi,image_id+".jpg")
     return result
 
 # 反馈图片识别是否正确

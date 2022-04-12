@@ -1,3 +1,4 @@
+import asyncio
 from model import schemas
 from fastapi import APIRouter
 from service import userService
@@ -15,7 +16,8 @@ async def login(info:schemas.Login):
     如果用户第一次登录则将其添加到数据库中
     """
     print(info.user_id, info.user_name, info.avatar)
-    response = userService.login(info.user_id, info.user_name, info.avatar)
+    loop = asyncio.get_event_loop()
+    response = await loop.run_in_executor(None,userService.login,info.user_id, info.user_name, info.avatar)
     return response
 
 @router.get("/getinfo")

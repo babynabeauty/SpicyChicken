@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import APIRouter
 from service import newsService
 from fastapi import File
@@ -39,7 +40,8 @@ async def generate_news(offset:int):
     r"""
     根据偏移量获取新闻列表
     """
-    response = newsService.getnewsList(offset)
+    loop = asyncio.get_event_loop()
+    response = await loop.run_in_executor(None,newsService.getnewsList,offset)
     return response
 
 @router.get("/gettest")
