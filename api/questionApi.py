@@ -2,6 +2,7 @@ import asyncio
 from fastapi import APIRouter
 from service import questionService
 from model import schemas
+
 # 构建api路由
 router = APIRouter(
     prefix="/question",

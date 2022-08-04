@@ -3,6 +3,8 @@ from fastapi import APIRouter
 from service import newsService
 from fastapi import File
 from fastapi import Form
+import os
+from const import *
 
 # 构建api路由
 router = APIRouter(
@@ -30,7 +32,7 @@ async def generate_news(id: int):
     r"""
     根据id获取html的文本内容
     """
-    path = "/var/www/html/news/%d/index.html" % (id)
+    path = os.path.join(news_save_path, str(id), "index.html")
     with open(path, "r", encoding="utf-8") as f:
         response = "".join(f.readlines())
     return response
@@ -42,14 +44,4 @@ async def generate_news(offset:int):
     """
     loop = asyncio.get_event_loop()
     response = await loop.run_in_executor(None,newsService.getnewsList,offset)
-    return response
-
-@router.get("/gettest")
-async def gettest():
-    r"""
-    测试html文档获取
-    """
-    path = "/root/zhang/test.html"
-    with open(path, "r", encoding="utf-8") as f:
-        response = "".join(f.readlines())
     return response

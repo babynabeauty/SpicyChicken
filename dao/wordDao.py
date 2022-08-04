@@ -2,6 +2,7 @@ import string
 
 from dao.dbConnect import connect
 
+# 模糊搜索，关键词匹配
 def vagueSearch(name:string):
     try:
         db, cursor = connect()
@@ -16,6 +17,7 @@ def vagueSearch(name:string):
         cursor.close()
     return data, True
 
+# 全字匹配搜索
 def detailSearch(name:string):
     try:
         db, cursor = connect()

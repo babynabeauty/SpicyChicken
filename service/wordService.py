@@ -1,5 +1,3 @@
-'''对文字识别的操作'''
-
 from dao import wordDao
 
 def wordSearch(word):

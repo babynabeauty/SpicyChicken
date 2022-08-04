@@ -25,6 +25,51 @@ def login(user_id, user_name, avatar):
         cursor.close()
     return True
 
+
+# 软件端存储用户id（Android端）
+def login2(user_name,user_psw,avatar):
+    try:
+        db, cursor = connect()
+        sql = "select * from user2 where user_name = '%s'" % (user_name)
+        print(sql)
+        cnt = cursor.execute(sql)
+        print(cnt)
+        db.commit()
+        if(cnt == 0):
+            # sql = "insert into user2(user_id, user_name, avatar, score,user_psw) values('%d','%s','%s', %d,%s)" % (3, user_name, avatar, 0, user_psw)
+            sql = "insert into user2(user_name, avatar, score,user_psw) values('%s','%s', %d,%s)" % (user_name, avatar, 0, user_psw)
+            print(sql)
+            cursor.execute(sql)
+            print("success")
+            db.commit()
+            # 1注册成功
+            data = 0
+            fl = 1
+            print(fl)
+        # 不是新加入的用户检测对不对数据库
+        else:
+            # 更新用户数据
+            sql = "select * from user2 where user_name = '%s'" % (user_name)
+            # sql = "select * from user2"
+            print(sql)
+            cursor.execute(sql)
+            db.commit()
+            data = cursor.fetchone()
+            print(data)
+            # 不是新加入的用户
+            fl = 2
+    except Exception:
+        db.rollback()
+        return False
+    finally:
+        db.close()
+        cursor.close()
+    if fl == 1:
+        return fl,data
+    else:
+        return fl,data
+
+
 # 每日一题回答正确加分
 def add_score(user_id:str):
     try:

@@ -2,15 +2,16 @@ import os
 from pydocx import PyDocX
 import zipfile
 import re
-import time
+from const import *
 # 服务器存放路径
-htmlpath = "/var/www/html/news/"
+htmlpath = news_save_path
+
 def extract_jpg(filename):
     # 文件地址
-    doc_path = htmlpath +  "documents/"+ filename + ".docx"
+    doc_path = os.path.join(htmlpath, "documents", filename + ".docx")
     # 图片存放地址
-    os.makedirs(htmlpath + filename + "/" + "index/word/media")
-    image_path = htmlpath + filename + "/index/"
+    os.makedirs(os.path.join(htmlpath, filename, "index", "word", "media"))
+    image_path = os.path.join(htmlpath, filename, "index")
     # 解析压缩包
     doc = zipfile.ZipFile(doc_path)     
     # 提取文档图片
@@ -22,17 +23,19 @@ def extract_jpg(filename):
 
 def convert_to_html(filename):
     # 建立新闻文件夹
-    dirpath = htmlpath + filename + "/"
+    dirpath = os.path.join(htmlpath, filename)
     os.mkdir(dirpath)
     # Doc转换成Html文件
-    html = PyDocX.to_html(htmlpath +  "documents/"+ filename + ".docx")
-    f = open(htmlpath + filename + "/index.html", 'w', encoding="utf-8")
+    html = PyDocX.to_html(os.path.join(htmlpath, "documents", filename + ".docx"))
+    path = os.path.join(htmlpath, filename, "index.html")
+    f = open(path, 'w', encoding="utf-8")
     f.write(html)
     f.close()
 
 def xml_convert(title, institution, time, filename):
     # 打开文件
-    with open(htmlpath + filename + "/index.html", "r", encoding="utf-8") as f:
+    path = os.path.join(htmlpath, filename, "index.html")
+    with open(path, "r", encoding="utf-8") as f:
         html = f.readline()
 
     # 替换head
@@ -72,19 +75,20 @@ def xml_convert(title, institution, time, filename):
 
     # 处理图片信息
     img_datalist = re.findall("<img (.*?)>", html)
-    img_path = htmlpath + filename  + "/index/word/media/"
+    img_path = os.path.join(htmlpath, filename, "index", "word", "media")
     img_name = os.listdir(img_path)
     img_name.sort()
     for i in range(len(img_datalist)):
         each_img_data = img_datalist[i]
-        img_src = 'src={img_src} style="display: block;"'.format(img_src = "http://123.60.94.12/news/" + filename  + "/index/word/media/" + img_name[i])
+        img_src = 'src={img_src} style="display: block;"'.format(img_src = "http://" + host + "/news/" + filename  + "/index/word/media/" + img_name[i])
         html = html.replace(each_img_data, img_src)
 
     # 添加css style
     html = add_style(html)
 
     # 重新写入文件
-    with open(htmlpath + filename + "/index.html", "w", encoding="utf-8") as f:
+    path = os.path.join(htmlpath, filename, "index.html")
+    with open(path, "w", encoding="utf-8") as f:
         f.write(html)
 
 def add_style(html:str):
@@ -118,4 +122,4 @@ def generate_news(title, institution, filename, time_now):
         xml_convert(title, institution, time_now, filename)
     except:
         return None
-    return "http://123.60.94.12/news/" + filename + '/index.html'
+    return "http://" + host + "/news/" + filename + '/index.html'

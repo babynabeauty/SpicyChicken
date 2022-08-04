@@ -6,8 +6,6 @@ def objectResearch(name:string):
     try:
         db, cursor = connect()
         # 选择带数据库中带有这个关键词的
-        # sql = "select * from kind where name like '% %s %'"%(name)
-        # sql="select * from kind where name like '% %s %'" %(name)
         sql="select * from kind where name like '%{name}%'".format(name=name)
         cursor.execute(sql)
         db.commit()

@@ -1,14 +1,6 @@
-# 文字查询有关的api
-
 import asyncio
 import os
-import shutil
-from pathlib import Path
-from typing import Union, Any
-from tempfile import NamedTemporaryFile
 from fastapi import APIRouter, Depends, File, UploadFile
-from fastapi import File
-from fastapi import Form
 from service import wordService
 
 # 构建api路由
