@@ -1,6 +1,6 @@
 ## Our 🌶️🐔 project！
 
-[![image](https://img.shields.io/badge/author-7鑫协力 铁骨征征-blue.svg?logo=Github&logoColor=white)]()
+ ![image](https://img.shields.io/badge/author-7鑫协力 铁骨征征-blue.svg?logo=Github&logoColor=white)
 
 ### 环境说明
 
@@ -28,12 +28,6 @@ mysql> source garbage.sql
 ```
 同时修改`dao/config.json`文件
 
-**启动程序**
-
-```shell
-python main.py
-```
-
 ### 模型训练
 
 模型使用迁移学习进行训练，主要使用`ResNet`和`MobileNet`网络在[数据集](https://zhasion.obs.cn-north-4.myhuaweicloud.com/files/train_data.zip)上进行训练，对垃圾图片进行四分类。
@@ -46,3 +40,8 @@ wget https://zhasion.obs.cn-north-4.myhuaweicloud.com/files/18finetune2.pkl
 wget https://zhasion.obs.cn-north-4.myhuaweicloud.com/files/mobilenetv2_garbage.pkl
 ```
 
+**启动程序**
+
+```shell
+python main.py
+```
